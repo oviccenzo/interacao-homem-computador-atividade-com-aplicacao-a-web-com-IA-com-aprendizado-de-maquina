@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Inteligencia Artificial com aprendizado de maquina - IHC Projeto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Aprendizado de maquina - machine learning</h1>
+        <nav>
+            <ul>
+                <li><a href="#sobre">O que é machine learning</a></li>
+                <li><a href="#aprendizado">Como podemos aprender machine learning</a></li>
+                <li><a href="#quiz">Como testar o conhecimento do machine learning</a></li>
+            </ul>
+        </nav>
+
+        <div class="acessiblity-bar">
+            <button onclick="changeFontSize('increase')">A+</button>
+            <button onclick="changeFontSize('decrease')">A-</button>
+            <button onclick="toggleContrast()">Alto constrate</button>
+        </div>
+    </header>
+
+    <main id="content">
+        <section id="sobre">
+            <h2>O que é</h2>
+            <div class="video-container">
+                <video controls="100%">
+                    <source src="Vídeo_de_Avatar.mp4" type="video/mp4">
+                    O meu navegador suporta videois curtos ou longo
+                </video>
+            </div>
+            <p>Machina learning é uma das área da IA que ensina computadores a aprender com os dados fornecidos
+            pelos criador do dataset ou site de programação pelo site que o criador que criou ou usando a ia para criar
+            site do proprio navegador</p>
+        </section>
+
+        <section id="quiz">
+            <h2>Quiz da Área de IA com machine laerning</h2>
+            <div id="quiz-container">
+                <p>O que significa Training Data?</p>
+                <button onclick="check(true)">Dados para modelo aprender com IA machine learning</button>
+                <button onclick="check(false)">Dados para deletar com IA machine learning</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Densevolvido pelo Viccenzo Oliveira(IFTM)</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
