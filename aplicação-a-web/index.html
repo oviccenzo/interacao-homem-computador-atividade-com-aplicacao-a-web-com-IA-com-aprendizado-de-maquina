@@ -2,53 +2,61 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Inteligencia Artificial com aprendizado de maquina - IHC Projeto</title>
+    <title>Inteligencia Artificial com aprendizado de maquina - IHC Projeto IFTM</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
+    <header>
         <h1>Aprendizado de maquina - machine learning</h1>
         <nav>
             <ul>
-                <li><a href="#sobre">O que é machine learning</a></li>
-                <li><a href="#aprendizado">Como podemos aprender machine learning</a></li>
-                <li><a href="#cursos">Cursos e Tutoriais</a></li> <li><a href="#quiz">Testar o seu conheciemento
-                com machine learning</a>
-            </li>
+                <li><a href="#Sobre">O que é machine learning</a></li>
+                <li><a href="#Aprendizado">Como podemos aprender machine learning</a></li>
+                <li><a href="#Cursos">Cursos e Tutoriais</a> </li>
+                <li><a href="#quiz">Como testar o seu conhecimento sobre a IA com machine learning</a></li>
             </ul>
         </nav>
 
         <div class="acessiblity-bar">
-            <button onclick="changeFontSize('increase')" aria-label="Aumentar fonte">A+</button>
-            <button onclick="changeFontSize('decrease')" aria-label="Diminuir fonte">A-</button>
-            <button onclick="toggleContrast()">Alto constrate</button>
-            <button onclick="lerConteudo()">Ouvir a pagina do navegador</button>
+            <button onclick="changeFontSize('increase')" aria-label="Aumentar a fonte">A+</button>
+            <button onclick="changeFontSize('decrease')" aria-label="Diminiur a fonte">A-</button>
+            <button onclick="toggleContrast()">Alto constrate do meu site da aplicacao a web</button>
+            <button onclick="lerConteudo()">Ouvir a pagina minha explicacao sobre esse conceito de IA com machine learning</button>
         </div>
     </header>
 
     <main id="content">
-        <section id="sobre">
+        <section id="Sobre">
             <h2>O que é</h2>
             <div class="video-container">
                 <video controls="100%">
-                    <source src="Vídeo_de_Avatar.mp4" type="video/mp4">
-                    O meu navegador suporta videois curtos ou longo
+                    <source src="Vídeo_de_Avatar_inteligencia_artificial_e_aprendizado_de_maquina.mp4" type="video/mp4">
+                    O meu navegador suporta videos curtos ou longo
                 </video>
             </div>
-            <p>Machine learning é uma das área da IA que ensina computadores a aprender com os dados fornecidos
+            <p>Machine learning é uma das área da IA que ensina computaodres a aprender com os dados fornecidos
             pelos criador do dataset ou site de programação pelo site que o criador que criou ou usando a ia para criar
             site do proprio navegador</p>
         </section>
 
-        <section id="cursos">
-            <h2>Curso e Tutoriais</h2>
-            <p>Conferi estes recurso rápidos para ses especializar a area da computacao com ia</p>
+        <section id="Aprendizado">
+            <h2>Como aprender machine learning</h2>
+            <p>Para começar essa área é fundamental dominar esse conceito sobre IA:</p>
             <ul>
-                <li><strong>Curso rapidos </strong>Alura (Imersão Dados com python), Coursera e Khan Academy</li>
-                <li><strong>Tutoriais </strong> Documentação oficial do Scikit-learning e Kaggle.</li>
-
+                <li>Lógica de programação e Python</li>
+                <li>Probabilidade e Estatística e Calculo (Lembra do I e II?)</li>
+                <li>Com varriedade tipo de biblioteca tipo pandas , scikit-learn e TensorFlow, Image</li>
             </ul>
+        </section>
+
+        <section id="Cursos">
+            <h2>Quiz da area de machine learning</h2>
+            <p>Para conferir esse recuros rápido de Machine</p>
+            <ul>
+                <li><strong>Cursos rápido da alura é um curso de programação: </strong>Alura(imersão dados com python), Coursera e khan academy</li>
+            </ul>
+                
         </section>
 
         <section id="quiz">
@@ -57,17 +65,26 @@
                 <p>O que significa Training Data?</p>
                 <button onclick="check(true)">Dados para modelo aprender com IA machine learning</button>
                 <button onclick="check(false)">Dados para deletar com IA machine learning</button>
+                <p id="resultado"></p>
             </div>
         </section>
 
-        <section id="instrução-de-acessibilidades">
-
+        <section id="instruções-de-acessiblidades">
+            <h2>Instruções de Acessibilidades</h2>
+            <p>Esta foi projetado para ser incluivo dessa pagina: </p>
+            <ul>
+                <li><strong>Contraste: </strong> 1 - Ao utililzar o botão de alto contraste server para melhorar a visualização do página.</li>
+                <li><strong>Fonte: </strong> 2 - O vídeo do avatar possui a transcrição textual abaixo dele sobre a minha explicação.</li>
+                <li><strong>Vídeo: </strong>  3 - O compatível com ledores de tela como a tags semântica do HTML5.</li>
+                <li><strong>Leitura: </strong> 4 - A função da síntase de voz minha eu que eu pesquisei e mandou a ia heygen fazer o avatar e falar
+                bem para ler o conteudo da pagina.</li>
+            </ul>
         </section>
-
     </main>
 
     <footer>
-        <p>&copy; 2026 - Densevolvido pelo Viccenzo Oliveira(IFTM)</p>
+        <p>&copy; 2026 - 27/4/2026 -  Densevolvido pelo Viccenzo Oliveira(IFTM) | Setimo periodo da ciência da computação
+            - IFTM</p>
     </footer>
 
     <script src="script.js"></script>
