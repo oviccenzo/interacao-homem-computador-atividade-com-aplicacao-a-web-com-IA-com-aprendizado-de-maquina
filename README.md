@@ -1,2 +1,2 @@
-#<h1> Atividade de interação homem computador
+<h1> Atividade de interação homem computador
 ---------------------------------------
