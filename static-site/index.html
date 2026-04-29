@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA com Aprendizado de Máquina | IHC - IFTM Ituiutaba</title>
+  <meta name="description" content="Avatar explicativo sobre IA com Aprendizado de Máquina - Atividade de IHC, Ciência da Computação, IFTM Campus Ituiutaba." />
+  <meta name="author" content="Viccenzo de Oliveira Nunes Resende" />
+<!--  <link rel="stylesheet" href="styles.css" />-->
+</head>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5faf6;--fg:#0a1f12;--card:#fff;--muted:#5a6f60;--border:#d8e6dc;
+  --primary:#0a4d2e;--accent:#1f9d55;--accent-2:#1ad17e;
+  --grad-hero:linear-gradient(135deg,#0a4d2e 0%,#13733f 50%,#1f9d55 100%);
+  --grad-accent:linear-gradient(90deg,#1f9d55,#1ad17e);
+  --shadow-soft:0 8px 30px -8px rgba(10,77,46,.15);
+  --shadow-elegant:0 20px 60px -20px rgba(10,77,46,.35);
+}
+html,body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--fg);line-height:1.5;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+.icon{width:24px;height:24px;color:var(--accent)}
+.icon-lg{width:40px;height:40px}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:var(--grad-hero);color:#fff}
+.hero-inner{padding:3rem 1.5rem 5rem;position:relative;z-index:1}
+.hero-blob{position:absolute;border-radius:9999px;filter:blur(80px);opacity:.15}
+.hero-blob-1{top:2.5rem;left:2.5rem;width:18rem;height:18rem;background:var(--accent);animation:pulse 4s ease-in-out infinite}
+.hero-blob-2{bottom:2.5rem;right:2.5rem;width:24rem;height:24rem;background:#fff}
+@keyframes pulse{0%,100%{opacity:.15}50%{opacity:.25}}
+.institution{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.institution-name{font-size:.875rem;text-transform:uppercase;letter-spacing:.15em;opacity:.9}
+.institution-campus{font-size:.75rem;opacity:.75}
+.hero-title{font-size:clamp(2rem,5vw,3.75rem);font-weight:700;line-height:1.1;max-width:55rem}
+.highlight{background:var(--accent);padding:.1em .5rem;border-radius:.5rem;color:#fff;display:inline-block}
+.hero-subtitle{margin-top:1.5rem;font-size:1.125rem;opacity:.9;max-width:36rem}
+
+/* Cards */
+.info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:-2.5rem;position:relative;z-index:2}
+.card{background:var(--card);border-radius:.75rem;padding:1.25rem;border:1px solid var(--border);box-shadow:var(--shadow-soft)}
+.card-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.5rem}
+.card-value{font-size:.875rem;font-weight:600;margin-top:.25rem}
+
+/* Vídeo */
+.video-section{padding:4rem 1.5rem;display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
+@media(min-width:1024px){.video-section{grid-template-columns:3fr 2fr}}
+.video-wrapper{position:relative}
+.video-wrapper video{width:100%;display:block;border-radius:1rem;background:#000;box-shadow:var(--shadow-elegant)}
+.video-caption{text-align:center;color:var(--muted);font-size:.875rem;margin-top:.75rem}
+.video-text h2{font-size:clamp(1.75rem,3vw,2.25rem);font-weight:700;line-height:1.2;margin:.75rem 0 1rem}
+.video-text p{color:var(--muted);margin-bottom:1rem}
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .8rem;border-radius:9999px;background:rgba(31,157,85,.1);color:var(--accent);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+
+/* Conceitos */
+.concepts{background:#e6f0e9;padding:4rem 0}
+.concepts-header{text-align:center;margin-bottom:3rem}
+.concepts-header h2{font-size:clamp(1.75rem,3vw,2.25rem);font-weight:700}
+.concepts-header p{color:var(--muted);margin-top:.75rem;max-width:36rem;margin-left:auto;margin-right:auto}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.concept{background:var(--card);border-radius:1rem;padding:1.75rem;border:1px solid var(--border);box-shadow:var(--shadow-soft);transition:transform .3s ease}
+.concept:hover{transform:translateY(-4px)}
+.concept-icon{width:3rem;height:3rem;border-radius:.75rem;background:var(--grad-accent);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.concept-icon svg{width:24px;height:24px;color:#fff}
+.concept h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
+.concept p{color:var(--muted);font-size:.875rem}
+
+/* Footer */
+footer{background:var(--primary);color:#fff;padding:2.5rem 0;text-align:center}
+.footer-title{font-weight:600}
+.footer-sub{font-size:.875rem;opacity:.8;margin-top:.4rem}
+
+/* Curso */
+.course{padding:4rem 0;background:var(--bg)}
+.course-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1rem}
+@media(min-width:900px){.course-grid{grid-template-columns:3fr 2fr}}
+.course-info h3{font-size:1.5rem;font-weight:700;margin-bottom:1rem;color:var(--primary)}
+.course-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.course-list li{padding:1rem 1.25rem;background:var(--card);border-left:4px solid var(--accent);border-radius:.5rem;box-shadow:var(--shadow-soft);font-size:.95rem;color:var(--muted)}
+.course-list li strong{color:var(--fg);display:block;margin-bottom:.2rem}
+.course-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-content:start}
+.stat{background:var(--grad-hero);color:#fff;padding:1.75rem 1rem;border-radius:1rem;text-align:center;box-shadow:var(--shadow-elegant)}
+.stat-number{display:block;font-size:2.5rem;font-weight:800;line-height:1}
+.stat-label{display:block;font-size:.875rem;opacity:.9;margin-top:.4rem;text-transform:uppercase;letter-spacing:.1em}
+
+/* Quiz */
+.quiz-section{padding:4rem 0;background:#e6f0e9}
+.quiz-card,.quiz-result{max-width:700px;margin:2rem auto 0;background:var(--card);border-radius:1rem;padding:2rem;box-shadow:var(--shadow-elegant);border:1px solid var(--border)}
+.quiz-progress{height:8px;background:var(--border);border-radius:9999px;overflow:hidden;margin-bottom:1rem}
+.quiz-progress-bar{height:100%;background:var(--grad-accent);width:25%;transition:width .4s ease;border-radius:9999px}
+.quiz-counter{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem}
+.quiz-card h3{font-size:1.35rem;font-weight:700;margin-bottom:1.5rem;line-height:1.4}
+.quiz-options{display:flex;flex-direction:column;gap:.75rem}
+.quiz-option{text-align:left;padding:1rem 1.25rem;background:var(--bg);border:2px solid var(--border);border-radius:.6rem;cursor:pointer;font-size:.95rem;color:var(--fg);transition:all .2s ease;font-family:inherit}
+.quiz-option:hover:not(:disabled){border-color:var(--accent);transform:translateX(4px)}
+.quiz-option:disabled{cursor:not-allowed}
+.quiz-option.correct{background:#d1f5dd;border-color:var(--accent);color:var(--primary);font-weight:600}
+.quiz-option.wrong{background:#fde2e2;border-color:#e74c3c;color:#c0392b}
+.quiz-footer{margin-top:1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.quiz-feedback{font-size:.9rem;color:var(--muted);flex:1}
+.quiz-feedback.correct{color:var(--accent);font-weight:600}
+.quiz-feedback.wrong{color:#c0392b;font-weight:600}
+.quiz-btn{background:var(--grad-accent);color:#fff;border:none;padding:.7rem 1.4rem;border-radius:.5rem;font-weight:600;cursor:pointer;font-size:.95rem;font-family:inherit;transition:transform .2s ease,box-shadow .2s ease}
+.quiz-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+.quiz-result{text-align:center}
+.quiz-result h3{font-size:1.75rem;font-weight:700;margin-bottom:1rem;color:var(--primary)}
+.quiz-score{font-size:1.1rem;color:var(--muted);margin-bottom:.75rem}
+.quiz-score span{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.quiz-result-msg{margin-bottom:1.5rem;color:var(--muted)}
+
+/* === Pontuação detalhada === */
+.score-bar-outer {
+  width: 100%;
+  height: 14px;
+  background: rgba(0,0,0,.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 1rem 0 1.5rem;
+}
+.score-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 999px;
+  transition: width 1s ease;
+}
+.review-title {
+  margin: 1.5rem 0 .75rem;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+.review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  text-align: left;
+  display: grid;
+  gap: .5rem;
+}
+.review-list li {
+  display: flex;
+  gap: .65rem;
+  align-items: flex-start;
+  padding: .65rem .85rem;
+  background: rgba(0,0,0,.03);
+  border-left: 3px solid #ccc;
+  border-radius: 6px;
+  font-size: .92rem;
+  line-height: 1.4;
+}
+.review-list li.ok {
+  border-left-color: #1f9d55;
+  background: rgba(31,157,85,.08);
+}
+.review-list li.fail {
+  border-left-color: #e3342f;
+  background: rgba(227,52,47,.08);
+}
+.review-list .mark {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.review-list li.ok .mark { color: #1f9d55; }
+.review-list li.fail .mark { color: #e3342f; }
+
+</style>
+
+<body>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="container hero-inner">
+      <div class="institution">
+        <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <div>
+          <p class="institution-name">Instituto Federal do Triângulo Mineiro</p>
+          <p class="institution-campus">Campus Ituiutaba</p>
+        </div>
+      </div>
+      <h1 class="hero-title">
+        Inteligência Artificial com <span class="highlight">Aprendizado de Máquina</span>
+      </h1>
+      <p class="hero-subtitle">
+        Atividade da disciplina de Interação Homem-Computador — Avatar explicativo sobre uma área da Ciência da Computação.
+      </p>
+    </div>
+  </header>
+
+  <!-- Ficha -->
+  <section class="container info-cards">
+    <div class="card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <p class="card-label">Aluno</p>
+      <p class="card-value">Viccenzo de O. Nunes Resende</p>
+    </div>
+    <div class="card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <p class="card-label">Disciplina</p>
+      <p class="card-value">IHC — 7º Período</p>
+    </div>
+    <div class="card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      <p class="card-label">Professor</p>
+      <p class="card-value">Reane Franco Goulart</p>
+    </div>
+    <div class="card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <p class="card-label">Entrega</p>
+      <p class="card-value">31/03/2026</p>
+    </div>
+  </section>
+
+  <!-- Vídeo -->
+  <section class="container video-section">
+    <div class="video-wrapper">
+      <video src="avatar-ia.mp4" controls playsinline></video>
+      <p class="video-caption">▶ Clique no play para assistir o avatar explicar IA com Aprendizado de Máquina</p>
+    </div>
+    <div class="video-text">
+      <span class="badge">✨ Tema escolhido</span>
+      <h2>O futuro moldando o presente</h2>
+      <p>Diferente da programação tradicional, no Aprendizado de Máquina ensinamos a máquina a aprender com dados. Algoritmos e modelos estatísticos permitem que o sistema identifique padrões e tome decisões sozinho.</p>
+      <p>Recomendações da Netflix, reconhecimento facial do celular, assistentes virtuais — tudo isso é Machine Learning na prática.</p>
+    </div>
+  </section>
+
+  <!-- Curso -->
+  <section class="course">
+    <div class="container">
+      <div class="concepts-header">
+        <span class="badge">🎓 Sobre o curso</span>
+        <h2>Bacharelado em Ciência da Computação</h2>
+        <p>O curso do IFTM Campus Ituiutaba forma profissionais capazes de projetar, desenvolver e aplicar soluções computacionais para os desafios da sociedade contemporânea.</p>
+      </div>
+
+      <div class="course-grid">
+        <div class="course-info">
+          <h3>O que você estuda</h3>
+          <ul class="course-list">
+            <li><strong>Algoritmos e Estruturas de Dados</strong> — base lógica para resolver problemas de forma eficiente.</li>
+            <li><strong>Engenharia de Software</strong> — práticas para construir sistemas robustos e escaláveis.</li>
+            <li><strong>Inteligência Artificial</strong> — aprendizado de máquina, redes neurais e visão computacional.</li>
+            <li><strong>Banco de Dados</strong> — modelagem, SQL e gerenciamento de grandes volumes de informação.</li>
+            <li><strong>Redes e Sistemas Distribuídos</strong> — comunicação entre máquinas e arquiteturas modernas.</li>
+            <li><strong>Interação Homem-Computador</strong> — design centrado no usuário e usabilidade (esta disciplina!).</li>
+          </ul>
+        </div>
+
+        <div class="course-stats">
+          <div class="stat">
+            <span class="stat-number">8</span>
+            <span class="stat-label">Períodos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Anos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">+30</span>
+            <span class="stat-label">Disciplinas</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Gratuito</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conceitos -->
+  <section class="concepts">
+    <div class="container">
+      <div class="concepts-header">
+        <h2>Por dentro do Machine Learning</h2>
+        <p>Três pilares que sustentam essa área fascinante da Ciência da Computação</p>
+      </div>
+      <div class="concepts-grid">
+        <article class="concept">
+          <div class="concept-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z"/></svg>
+          </div>
+          <h3>Aprendizado com dados</h3>
+          <p>A máquina não recebe regras explícitas — ela aprende a partir de exemplos e generaliza para casos novos.</p>
+        </article>
+        <article class="concept">
+          <div class="concept-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+          </div>
+          <h3>Redes neurais</h3>
+          <p>Inspiradas no cérebro humano, processam informações em camadas para reconhecer padrões complexos.</p>
+        </article>
+        <article class="concept">
+          <div class="concept-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="15" x2="22" y2="15"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="15" x2="4" y2="15"/></svg>
+          </div>
+          <h3>Modelos que evoluem</h3>
+          <p>Quanto mais dados o modelo recebe, melhor fica em prever, classificar e tomar decisões.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="quiz-section">
+    <div class="container">
+      <div class="concepts-header">
+        <span class="badge">🧠 Teste seu conhecimento</span>
+        <h2>Quiz: Machine Learning</h2>
+        <p>Responda 4 perguntas e veja quanto você aprendeu com o avatar.</p>
+      </div>
+
+      <div id="quiz" class="quiz-card">
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar" id="progressBar"></div>
+        </div>
+        <p class="quiz-counter" id="counter">Pergunta 1 de 4</p>
+        <h3 id="question">Carregando...</h3>
+        <div class="quiz-options" id="options"></div>
+        <div class="quiz-footer">
+          <p id="feedback" class="quiz-feedback"></p>
+          <button id="nextBtn" class="quiz-btn" style="display:none">Próxima →</button>
+        </div>
+      </div>
+
+      <div id="result" class="quiz-result" style="display:none">
+        <h3 id="resultTitle"></h3>
+        <p class="quiz-score">Sua pontuação: <span id="scoreText"></span></p>
+        <p id="resultMsg" class="quiz-result-msg"></p>
+        <button class="quiz-btn" onclick="restartQuiz()">↻ Refazer quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p class="footer-title">IFTM — Campus Ituiutaba · Ciência da Computação</p>
+      <p class="footer-sub">IHC · 7º Período · Prof. Reane Franco Goulart · Viccenzo de Oliveira Nunes Resende · 31/03/2026</p>
+    </div>
+  </footer>
+
+  <script>
+    // Animação de entrada ao rolar
+document.addEventListener('DOMContentLoaded', () => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .concept, .video-wrapper, .video-text, .stat, .course-list li').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    obs.observe(el);
+  });
+
+  initQuiz();
+});
+
+// ==== QUIZ ====
+const questions = [
+  {
+    q: "O que diferencia o Aprendizado de Máquina da programação tradicional?",
+    options: [
+      "A máquina aprende padrões a partir de dados, sem regras explícitas.",
+      "Usa apenas estruturas if/else mais complexas.",
+      "Roda exclusivamente em supercomputadores.",
+      "Não precisa de dados para funcionar."
+    ],
+    correct: 0,
+    explain: "No ML, ensinamos a máquina a aprender com exemplos — ela mesma descobre os padrões."
+  },
+  {
+    q: "Qual destes é um exemplo do dia a dia que usa Machine Learning?",
+    options: [
+      "Uma calculadora simples.",
+      "Um relógio de pulso analógico.",
+      "Recomendações da Netflix e reconhecimento facial do celular.",
+      "Um documento de texto em branco."
+    ],
+    correct: 2,
+    explain: "Recomendações personalizadas e reconhecimento facial são clássicos do ML na prática."
+  },
+  {
+    q: "O que são Redes Neurais Artificiais?",
+    options: [
+      "Cabos físicos que ligam computadores em rede.",
+      "Modelos inspirados no cérebro humano que processam dados em camadas.",
+      "Uma rede social para programadores.",
+      "Um tipo de vírus de computador."
+    ],
+    correct: 1,
+    explain: "Redes neurais imitam neurônios e processam informações em várias camadas para reconhecer padrões."
+  },
+  {
+    q: "O que acontece com um modelo de ML quando recebe mais dados de qualidade?",
+    options: [
+      "Fica mais lento e impreciso.",
+      "Esquece o que aprendeu antes.",
+      "Tende a melhorar suas previsões e decisões.",
+      "Para de funcionar automaticamente."
+    ],
+    correct: 2,
+    explain: "Mais dados de qualidade = modelo mais preciso. Por isso o ML evolui continuamente."
+  },
+  {
+    q: "Qual é a diferença entre Aprendizado Supervisionado e Não Supervisionado?",
+    options: [
+      "Supervisionado usa dados rotulados; não supervisionado encontra padrões sozinho.",
+      "Um roda online e o outro offline.",
+      "Não há diferença prática entre eles.",
+      "Supervisionado é mais lento que não supervisionado."
+    ],
+    correct: 0,
+    explain: "Supervisionado aprende com exemplos rotulados (entrada → resposta). Não supervisionado descobre agrupamentos sem rótulos."
+  },
+  {
+    q: "O que é 'overfitting' em Machine Learning?",
+    options: [
+      "Quando o modelo é rápido demais.",
+      "Quando o modelo decora os dados de treino e falha em dados novos.",
+      "Quando faltam dados para treinar.",
+      "Quando o computador superaquece."
+    ],
+    correct: 1,
+    explain: "Overfitting acontece quando o modelo memoriza ao invés de generalizar — vai bem no treino, mal no mundo real."
+  },
+  {
+    q: "Qual destas tarefas é típica de Visão Computacional?",
+    options: [
+      "Calcular juros compostos.",
+      "Imprimir um documento.",
+      "Identificar objetos e rostos em imagens.",
+      "Compilar código C++."
+    ],
+    correct: 2,
+    explain: "Visão computacional permite que máquinas 'enxerguem' — reconhecendo rostos, objetos e cenas em imagens e vídeos."
+  },
+  {
+    q: "O que é um 'dataset' em Machine Learning?",
+    options: [
+      "Um tipo de placa de vídeo.",
+      "Um conjunto de dados usado para treinar e testar modelos.",
+      "Uma linguagem de programação.",
+      "Um modelo já treinado."
+    ],
+    correct: 1,
+    explain: "Dataset é a matéria-prima do ML — os dados que alimentam o aprendizado do modelo."
+  },
+  {
+    q: "Qual área da IA é responsável por entender e gerar linguagem humana?",
+    options: [
+      "Processamento de Linguagem Natural (PLN).",
+      "Computação Gráfica.",
+      "Banco de Dados Relacional.",
+      "Sistemas Operacionais."
+    ],
+    correct: 0,
+    explain: "PLN (NLP) é o que permite chatbots, tradutores automáticos e assistentes como ChatGPT funcionarem."
+  },
+  {
+    q: "Por que a ética é importante no desenvolvimento de IA?",
+    options: [
+      "Para deixar o código mais bonito.",
+      "Não é importante, IA é neutra.",
+      "Para evitar vieses, discriminação e garantir uso responsável da tecnologia.",
+      "Apenas para cumprir burocracia."
+    ],
+    correct: 2,
+    explain: "IAs aprendem com dados humanos e podem reproduzir preconceitos. Ética garante tecnologia justa e segura para todos."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answers = [];
+
+function initQuiz() {
+  current = 0;
+  score = 0;
+  answers = [];
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('result').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('counter').textContent = `Pergunta ${current + 1} de ${questions.length}`;
+  document.getElementById('progressBar').style.width = `${((current) / questions.length) * 100}%`;
+  document.getElementById('question').textContent = q.q;
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').className = 'quiz-feedback';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach((text, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = text;
+    btn.onclick = () => selectAnswer(i, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function selectAnswer(i, btn) {
+  const q = questions[current];
+  const buttons = document.querySelectorAll('.quiz-option');
+  buttons.forEach(b => b.disabled = true);
+
+  const isCorrect = i === q.correct;
+  answers.push({ q: q.q, correct: isCorrect });
+
+  const feedback = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    feedback.textContent = '✓ Correto! ' + q.explain;
+    feedback.className = 'quiz-feedback correct';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    buttons[q.correct].classList.add('correct');
+    feedback.textContent = '✗ Quase! ' + q.explain;
+    feedback.className = 'quiz-feedback wrong';
+  }
+
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.style.display = 'inline-block';
+  nextBtn.textContent = current === questions.length - 1 ? 'Ver resultado →' : 'Próxima →';
+  nextBtn.onclick = nextQuestion;
+}
+
+function nextQuestion() {
+  current++;
+  if (current < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  const result = document.getElementById('result');
+  result.style.display = 'block';
+
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('scoreText').innerHTML =
+    `<strong>${score}</strong> de <strong>${total}</strong> &middot; <strong>${pct}%</strong>`;
+
+  let title, msg, emoji;
+  if (pct === 100) {
+    emoji = '🏆'; title = 'Perfeito!';
+    msg = 'Você dominou os conceitos de Machine Learning. Nota máxima!';
+  } else if (pct >= 80) {
+    emoji = '🌟'; title = 'Excelente!';
+    msg = 'Conhecimento sólido em IA. Faltou pouco para o gabarito!';
+  } else if (pct >= 60) {
+    emoji = '👏'; title = 'Muito bem!';
+    msg = 'Você entendeu o essencial. Reveja os pontos errados e fixe ainda mais.';
+  } else if (pct >= 40) {
+    emoji = '📖'; title = 'No caminho certo';
+    msg = 'Reveja o vídeo do avatar e os conceitos acima para evoluir.';
+  } else {
+    emoji = '📚'; title = 'Continue estudando!';
+    msg = 'Não desanime — assista de novo e tente outra vez. Você consegue!';
+  }
+  document.getElementById('resultTitle').textContent = `${emoji} ${title}`;
+  document.getElementById('resultMsg').textContent = msg;
+
+  // Barra visual de pontuação + detalhamento
+  let extra = document.getElementById('scoreDetails');
+  if (!extra) {
+    extra = document.createElement('div');
+    extra.id = 'scoreDetails';
+    document.getElementById('result').insertBefore(
+      extra,
+      document.querySelector('#result button')
+    );
+  }
+  const reviewItems = answers.map((a, idx) =>
+    `<li class="${a.correct ? 'ok' : 'fail'}">
+       <span class="mark">${a.correct ? '✓' : '✗'}</span>
+       <span>Q${idx + 1}. ${a.q}</span>
+     </li>`
+  ).join('');
+  extra.innerHTML = `
+    <div class="score-bar-outer" aria-label="Pontuação">
+      <div class="score-bar-inner" style="width:${pct}%"></div>
+    </div>
+    <h4 class="review-title">Revisão das respostas</h4>
+    <ul class="review-list">${reviewItems}</ul>
+  `;
+}
+
+function restartQuiz() {
+  initQuiz();
+}
+
+
+  </script>
+
+</body>
+</html>
