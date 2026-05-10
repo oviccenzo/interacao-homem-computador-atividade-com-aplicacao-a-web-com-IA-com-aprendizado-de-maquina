@@ -9,17 +9,18 @@
 //       }
 //     });
 //   }, { threshold: 0.1 });
-//
+
 //   document.querySelectorAll('.card, .concept, .video-wrapper, .video-text, .stat, .course-list li').forEach(el => {
 //     el.style.opacity = '0';
 //     el.style.transform = 'translateY(20px)';
 //     el.style.transition = 'opacity .6s ease, transform .6s ease';
 //     obs.observe(el);
 //   });
-//
+
 //   initQuiz();
+//   initDemo();
 // });
-//
+
 // // ==== QUIZ ====
 // const questions = [
 //   {
@@ -133,11 +134,11 @@
 //     explain: "IAs aprendem com dados humanos e podem reproduzir preconceitos. Ética garante tecnologia justa e segura para todos."
 //   }
 // ];
-//
+
 // let current = 0;
 // let score = 0;
 // let answers = [];
-//
+
 // function initQuiz() {
 //   current = 0;
 //   score = 0;
@@ -146,7 +147,7 @@
 //   document.getElementById('result').style.display = 'none';
 //   renderQuestion();
 // }
-//
+
 // function renderQuestion() {
 //   const q = questions[current];
 //   document.getElementById('counter').textContent = `Pergunta ${current + 1} de ${questions.length}`;
@@ -155,7 +156,7 @@
 //   document.getElementById('feedback').textContent = '';
 //   document.getElementById('feedback').className = 'quiz-feedback';
 //   document.getElementById('nextBtn').style.display = 'none';
-//
+
 //   const opts = document.getElementById('options');
 //   opts.innerHTML = '';
 //   q.options.forEach((text, i) => {
@@ -166,15 +167,15 @@
 //     opts.appendChild(btn);
 //   });
 // }
-//
+
 // function selectAnswer(i, btn) {
 //   const q = questions[current];
 //   const buttons = document.querySelectorAll('.quiz-option');
 //   buttons.forEach(b => b.disabled = true);
-//
+
 //   const isCorrect = i === q.correct;
 //   answers.push({ q: q.q, correct: isCorrect });
-//
+
 //   const feedback = document.getElementById('feedback');
 //   if (isCorrect) {
 //     btn.classList.add('correct');
@@ -187,13 +188,13 @@
 //     feedback.textContent = '✗ Quase! ' + q.explain;
 //     feedback.className = 'quiz-feedback wrong';
 //   }
-//
+
 //   const nextBtn = document.getElementById('nextBtn');
 //   nextBtn.style.display = 'inline-block';
 //   nextBtn.textContent = current === questions.length - 1 ? 'Ver resultado →' : 'Próxima →';
 //   nextBtn.onclick = nextQuestion;
 // }
-//
+
 // function nextQuestion() {
 //   current++;
 //   if (current < questions.length) {
@@ -202,17 +203,17 @@
 //     showResult();
 //   }
 // }
-//
+
 // function showResult() {
 //   document.getElementById('quiz').style.display = 'none';
 //   const result = document.getElementById('result');
 //   result.style.display = 'block';
-//
+
 //   const total = questions.length;
 //   const pct = Math.round((score / total) * 100);
 //   document.getElementById('scoreText').innerHTML =
 //     `<strong>${score}</strong> de <strong>${total}</strong> &middot; <strong>${pct}%</strong>`;
-//
+
 //   let title, msg, emoji;
 //   if (pct === 100) {
 //     emoji = '🏆'; title = 'Perfeito!';
@@ -232,7 +233,7 @@
 //   }
 //   document.getElementById('resultTitle').textContent = `${emoji} ${title}`;
 //   document.getElementById('resultMsg').textContent = msg;
-//
+
 //   // Barra visual de pontuação + detalhamento
 //   let extra = document.getElementById('scoreDetails');
 //   if (!extra) {
@@ -257,7 +258,122 @@
 //     <ul class="review-list">${reviewItems}</ul>
 //   `;
 // }
-//
+
 // function restartQuiz() {
 //   initQuiz();
+// }
+
+// // ==== DEMO: Classificador de Sentimento (Bag-of-Words) ====
+// // Mini "modelo" de ML didático: cada palavra tem um peso aprendido.
+// // Aplica princípios de IHC: feedback imediato, visibilidade, explicabilidade.
+// const ML_LEXICON = {
+//   // positivas
+//   "amei":3,"amo":2,"adorei":3,"adoro":2,"ótimo":3,"otimo":3,"ótima":3,"otima":3,
+//   "excelente":3,"maravilhoso":3,"maravilhosa":3,"incrível":3,"incrivel":3,
+//   "perfeito":3,"perfeita":3,"bom":2,"boa":2,"legal":2,"top":2,"sensacional":3,
+//   "feliz":2,"alegre":2,"gostei":2,"recomendo":2,"fantástico":3,"fantastico":3,
+//   "lindo":2,"linda":2,"bacana":2,"show":2,"melhor":2,"funciona":1,"rápido":1,"rapido":1,
+//   // negativas
+//   "odiei":-3,"odeio":-3,"péssimo":-3,"pessimo":-3,"péssima":-3,"pessima":-3,
+//   "horrível":-3,"horrivel":-3,"ruim":-2,"terrível":-3,"terrivel":-3,
+//   "triste":-2,"chato":-2,"chata":-2,"feio":-2,"feia":-2,"lento":-2,"lenta":-2,
+//   "decepcionado":-3,"decepcionada":-3,"decepção":-3,"decepcao":-3,
+//   "pior":-2,"detestei":-3,"detesto":-3,"problema":-1,"erro":-1,"bug":-1,
+//   "frustrante":-2,"travou":-2,"quebrou":-2,"nojento":-3,"nojenta":-3
+// };
+// // modificadores (negação)
+// const NEG_WORDS = new Set(["não","nao","nunca","jamais","nem"]);
+
+// function tokenize(txt){
+//   return txt.toLowerCase()
+//     .replace(/[.,!?;:()"\[\]]/g," ")
+//     .split(/\s+/)
+//     .filter(Boolean);
+// }
+
+// function classify(text){
+//   const tokens = tokenize(text);
+//   let score = 0;
+//   const matches = [];
+//   for (let i=0;i<tokens.length;i++){
+//     const t = tokens[i];
+//     if (ML_LEXICON[t] !== undefined){
+//       let w = ML_LEXICON[t];
+//       const prev = tokens[i-1];
+//       let negated = false;
+//       if (prev && NEG_WORDS.has(prev)){ w = -w; negated = true; }
+//       score += w;
+//       matches.push({ word: (negated? "não "+t : t), weight: w });
+//     }
+//   }
+//   // confiança via sigmoide
+//   const conf = 1/(1+Math.exp(-Math.abs(score)/2));
+//   let label = "neutro";
+//   if (score >= 1) label = "positivo";
+//   else if (score <= -1) label = "negativo";
+//   return { label, score, matches, confidence: Math.round(conf*100) };
+// }
+
+// function initDemo(){
+//   const input = document.getElementById("demoInput");
+//   const btn = document.getElementById("demoBtn");
+//   const clearBtn = document.getElementById("demoClear");
+//   const result = document.getElementById("demoResult");
+//   const emoji = document.getElementById("demoEmoji");
+//   const labelEl = document.getElementById("demoLabel");
+//   const bar = document.getElementById("demoBar");
+//   const conf = document.getElementById("demoConfidence");
+//   const wordsEl = document.getElementById("demoWords");
+//   if (!input || !btn) return;
+
+//   function run(){
+//     const txt = input.value.trim();
+//     if (!txt){
+//       input.focus();
+//       return;
+//     }
+//     const r = classify(txt);
+//     result.hidden = false;
+
+//     let emojiChar = "🤔", labelTxt = "Neutro / indefinido", cls = "neutral";
+//     if (r.label === "positivo"){ emojiChar="😊"; labelTxt="Positivo"; cls="positive"; }
+//     else if (r.label === "negativo"){ emojiChar="😞"; labelTxt="Negativo"; cls="negative"; }
+
+//     emoji.textContent = emojiChar;
+//     labelEl.textContent = labelTxt;
+//     labelEl.className = "demo-verdict-text " + cls;
+
+//     // anima a barra de confiança
+//     bar.style.width = "0%";
+//     bar.className = "demo-bar-fill" + (r.label==="negativo" ? " negative" : "");
+//     requestAnimationFrame(()=> { bar.style.width = r.confidence + "%"; });
+//     conf.textContent = r.confidence + "% de confiança · pontuação bruta: " + r.score;
+
+//     // explicabilidade
+//     wordsEl.innerHTML = "";
+//     if (r.matches.length === 0){
+//       const span = document.createElement("span");
+//       span.className = "demo-word";
+//       span.textContent = "Nenhuma palavra do vocabulário do modelo foi reconhecida.";
+//       wordsEl.appendChild(span);
+//     } else {
+//       r.matches.forEach(m => {
+//         const span = document.createElement("span");
+//         span.className = "demo-word " + (m.weight>0 ? "pos" : "neg");
+//         span.textContent = m.word + " (" + (m.weight>0?"+":"") + m.weight + ")";
+//         wordsEl.appendChild(span);
+//       });
+//     }
+//     result.scrollIntoView({behavior:"smooth", block:"nearest"});
+//   }
+
+//   btn.addEventListener("click", run);
+//   input.addEventListener("keydown", e => {
+//     if ((e.ctrlKey || e.metaKey) && e.key === "Enter") run();
+//   });
+//   clearBtn.addEventListener("click", () => {
+//     input.value = "";
+//     result.hidden = true;
+//     input.focus();
+//   });
 // }
