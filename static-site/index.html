@@ -6,10 +6,11 @@
   <title>IA com Aprendizado de Máquina | IHC - IFTM Ituiutaba</title>
   <meta name="description" content="Avatar explicativo sobre IA com Aprendizado de Máquina - Atividade de IHC, Ciência da Computação, IFTM Campus Ituiutaba." />
   <meta name="author" content="Viccenzo de Oliveira Nunes Resende" />
-<!--  <link rel="stylesheet" href="styles.css" />-->
+  <!-- <link rel="stylesheet" href="styles.css" /> -->
 </head>
 
 <style>
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#f5faf6;--fg:#0a1f12;--card:#fff;--muted:#5a6f60;--border:#d8e6dc;
@@ -164,11 +165,58 @@ footer{background:var(--primary);color:#fff;padding:2.5rem 0;text-align:center}
 .review-list li.ok .mark { color: #1f9d55; }
 .review-list li.fail .mark { color: #e3342f; }
 
+/* === Acessibilidade === */
+.skip-link{position:absolute;left:-999px;top:0;background:var(--primary);color:#fff;padding:.6rem 1rem;border-radius:0 0 .5rem 0;z-index:9999;font-weight:600}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* === IHC + ML === */
+.ihc-ml{padding:4rem 0;background:var(--bg)}
+.ihc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
+.ihc-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.75rem 1.5rem 1.5rem;box-shadow:var(--shadow-soft);transition:transform .25s ease,box-shadow .25s ease}
+.ihc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-elegant)}
+.ihc-num{position:absolute;top:-.75rem;left:1.25rem;background:var(--grad-accent);color:#fff;font-weight:800;font-size:.8rem;padding:.25rem .6rem;border-radius:9999px;letter-spacing:.05em}
+.ihc-card h3{font-size:1.1rem;font-weight:700;margin:.4rem 0 .5rem;color:var(--primary)}
+.ihc-card p{font-size:.9rem;color:var(--muted);line-height:1.55}
+
+/* === Demo classificador === */
+.demo-section{padding:4rem 0;background:#e6f0e9}
+.demo-card{max-width:720px;margin:1.5rem auto 0;background:var(--card);border-radius:1rem;padding:2rem;border:1px solid var(--border);box-shadow:var(--shadow-elegant)}
+.demo-label{display:block;font-weight:600;color:var(--primary);margin-bottom:.5rem}
+.demo-card textarea{width:100%;border:2px solid var(--border);border-radius:.6rem;padding:.85rem 1rem;font-family:inherit;font-size:1rem;color:var(--fg);background:var(--bg);resize:vertical;transition:border-color .2s}
+.demo-card textarea:focus{outline:none;border-color:var(--accent)}
+.demo-hint{font-size:.8rem;color:var(--muted);margin-top:.4rem}
+.demo-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.quiz-btn-ghost{background:transparent;color:var(--primary);border:2px solid var(--border)}
+.quiz-btn-ghost:hover{border-color:var(--accent);background:rgba(31,157,85,.05);box-shadow:none}
+.demo-result{margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.demo-verdict{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.demo-emoji{font-size:2.75rem;line-height:1}
+.demo-label-sm{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.35rem}
+.demo-verdict-text{font-size:1.4rem;font-weight:700;color:var(--primary)}
+.demo-verdict-text.positive{color:var(--accent)}
+.demo-verdict-text.negative{color:#c0392b}
+.demo-verdict-text.neutral{color:var(--muted)}
+.demo-bar{height:14px;background:rgba(0,0,0,.08);border-radius:9999px;overflow:hidden;margin-bottom:.4rem}
+.demo-bar-fill{height:100%;width:0%;background:var(--grad-accent);border-radius:9999px;transition:width .8s ease}
+.demo-bar-fill.negative{background:linear-gradient(90deg,#e74c3c,#ff8a65)}
+.demo-confidence{font-weight:700;font-size:1rem;color:var(--fg);margin-bottom:1.25rem}
+.demo-words{display:flex;flex-wrap:wrap;gap:.4rem}
+.demo-word{padding:.3rem .7rem;border-radius:9999px;font-size:.82rem;font-weight:600;background:rgba(0,0,0,.05);color:var(--muted)}
+.demo-word.pos{background:rgba(31,157,85,.15);color:#0a4d2e}
+.demo-word.neg{background:rgba(231,76,60,.15);color:#922b21}
+
+
 </style>
 
+
 <body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
   <!-- Hero -->
-  <header class="hero">
+  <header class="hero" role="banner">
     <div class="hero-blob hero-blob-1"></div>
     <div class="hero-blob hero-blob-2"></div>
     <div class="container hero-inner">
@@ -188,6 +236,7 @@ footer{background:var(--primary);color:#fff;padding:2.5rem 0;text-align:center}
     </div>
   </header>
 
+  <main id="conteudo">
   <!-- Ficha -->
   <section class="container info-cards">
     <div class="card">
@@ -208,7 +257,90 @@ footer{background:var(--primary);color:#fff;padding:2.5rem 0;text-align:center}
     <div class="card">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <p class="card-label">Entrega</p>
-      <p class="card-value">31/03/2026</p>
+      <p class="card-value">28/04/2026</p>
+    </div>
+  </section>
+
+  <!-- IHC + ML -->
+  <section class="ihc-ml">
+    <div class="container">
+      <div class="concepts-header">
+        <span class="badge">🤝 Conexão da disciplina</span>
+        <h2>IHC aplicado ao Machine Learning</h2>
+        <p>Como os princípios de Interação Homem-Computador tornam sistemas de IA mais úteis, transparentes e confiáveis para as pessoas.</p>
+      </div>
+
+      <div class="ihc-grid">
+        <article class="ihc-card">
+          <span class="ihc-num">01</span>
+          <h3>Visibilidade do estado do sistema</h3>
+          <p>Quando o modelo está pensando, o usuário precisa saber. Indicadores de carregamento, barras de confiança e mensagens claras evitam frustração.</p>
+        </article>
+        <article class="ihc-card">
+          <span class="ihc-num">02</span>
+          <h3>Feedback imediato</h3>
+          <p>A cada ação do usuário, o sistema responde — mostrando a previsão, a probabilidade e por que aquela resposta foi escolhida.</p>
+        </article>
+        <article class="ihc-card">
+          <span class="ihc-num">03</span>
+          <h3>Controle e liberdade</h3>
+          <p>O usuário deve poder corrigir, refazer ou ignorar uma sugestão da IA. Nunca decidir por ele sem possibilidade de desfazer.</p>
+        </article>
+        <article class="ihc-card">
+          <span class="ihc-num">04</span>
+          <h3>Explicabilidade</h3>
+          <p>Mostrar quais palavras, pixels ou padrões influenciaram a decisão do modelo gera confiança e ajuda no aprendizado humano.</p>
+        </article>
+        <article class="ihc-card">
+          <span class="ihc-num">05</span>
+          <h3>Prevenção de erros</h3>
+          <p>Validar entradas, alertar sobre dados insuficientes e comunicar incertezas evita decisões automatizadas equivocadas.</p>
+        </article>
+        <article class="ihc-card">
+          <span class="ihc-num">06</span>
+          <h3>Acessibilidade</h3>
+          <p>Modelos de IA devem funcionar para todos: leitores de tela, contraste adequado, navegação por teclado e linguagem simples.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo ML interativa -->
+  <section class="demo-section">
+    <div class="container">
+      <div class="concepts-header">
+        <span class="badge">🧪 Demonstração prática</span>
+        <h2>Classificador de Sentimento</h2>
+        <p>Digite uma frase em português. Um mini modelo de Machine Learning (bag-of-words) vai classificá-la como <strong>positiva</strong> ou <strong>negativa</strong> — e explicar o porquê, aplicando os princípios de IHC acima.</p>
+      </div>
+
+      <div class="demo-card">
+        <label for="demoInput" class="demo-label">Sua frase:</label>
+        <textarea id="demoInput" rows="3" placeholder="Ex.: Eu adorei essa aula, foi incrível!" aria-describedby="demoHint"></textarea>
+        <p id="demoHint" class="demo-hint">Dica: experimente palavras como "ótimo", "péssimo", "amei", "odiei", "horrível", "maravilhoso".</p>
+
+        <div class="demo-actions">
+          <button id="demoBtn" class="quiz-btn" type="button">Analisar sentimento</button>
+          <button id="demoClear" class="quiz-btn quiz-btn-ghost" type="button">Limpar</button>
+        </div>
+
+        <div id="demoResult" class="demo-result" aria-live="polite" hidden>
+          <div class="demo-verdict">
+            <span id="demoEmoji" class="demo-emoji">🤔</span>
+            <div>
+              <p class="demo-label-sm">Previsão</p>
+              <p id="demoLabel" class="demo-verdict-text">—</p>
+            </div>
+          </div>
+
+          <p class="demo-label-sm">Confiança do modelo</p>
+          <div class="demo-bar"><div id="demoBar" class="demo-bar-fill"></div></div>
+          <p id="demoConfidence" class="demo-confidence">0%</p>
+
+          <p class="demo-label-sm">Por que? (explicabilidade)</p>
+          <div id="demoWords" class="demo-words"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -309,14 +441,14 @@ footer{background:var(--primary);color:#fff;padding:2.5rem 0;text-align:center}
       <div class="concepts-header">
         <span class="badge">🧠 Teste seu conhecimento</span>
         <h2>Quiz: Machine Learning</h2>
-        <p>Responda 4 perguntas e veja quanto você aprendeu com o avatar.</p>
+        <p>Responda 10 perguntas e veja quanto você aprendeu com o avatar.</p>
       </div>
 
       <div id="quiz" class="quiz-card">
         <div class="quiz-progress">
           <div class="quiz-progress-bar" id="progressBar"></div>
         </div>
-        <p class="quiz-counter" id="counter">Pergunta 1 de 4</p>
+        <p class="quiz-counter" id="counter">Pergunta 1 de 10</p>
         <h3 id="question">Carregando...</h3>
         <div class="quiz-options" id="options"></div>
         <div class="quiz-footer">
@@ -341,9 +473,14 @@ footer{background:var(--primary);color:#fff;padding:2.5rem 0;text-align:center}
       <p class="footer-sub">IHC · 7º Período · Prof. Reane Franco Goulart · Viccenzo de Oliveira Nunes Resende · 31/03/2026</p>
     </div>
   </footer>
+  </main>
 
-  <script>
-    // Animação de entrada ao rolar
+  <script src="script.js"></script>
+</body>
+</html>
+
+<script>
+  // Animação de entrada ao rolar
 document.addEventListener('DOMContentLoaded', () => {
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -363,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   initQuiz();
+  initDemo();
 });
 
 // ==== QUIZ ====
@@ -607,8 +745,119 @@ function restartQuiz() {
   initQuiz();
 }
 
+// ==== DEMO: Classificador de Sentimento (Bag-of-Words) ====
+// Mini "modelo" de ML didático: cada palavra tem um peso aprendido.
+// Aplica princípios de IHC: feedback imediato, visibilidade, explicabilidade.
+const ML_LEXICON = {
+  // positivas
+  "amei":3,"amo":2,"adorei":3,"adoro":2,"ótimo":3,"otimo":3,"ótima":3,"otima":3,
+  "excelente":3,"maravilhoso":3,"maravilhosa":3,"incrível":3,"incrivel":3,
+  "perfeito":3,"perfeita":3,"bom":2,"boa":2,"legal":2,"top":2,"sensacional":3,
+  "feliz":2,"alegre":2,"gostei":2,"recomendo":2,"fantástico":3,"fantastico":3,
+  "lindo":2,"linda":2,"bacana":2,"show":2,"melhor":2,"funciona":1,"rápido":1,"rapido":1,
+  // negativas
+  "odiei":-3,"odeio":-3,"péssimo":-3,"pessimo":-3,"péssima":-3,"pessima":-3,
+  "horrível":-3,"horrivel":-3,"ruim":-2,"terrível":-3,"terrivel":-3,
+  "triste":-2,"chato":-2,"chata":-2,"feio":-2,"feia":-2,"lento":-2,"lenta":-2,
+  "decepcionado":-3,"decepcionada":-3,"decepção":-3,"decepcao":-3,
+  "pior":-2,"detestei":-3,"detesto":-3,"problema":-1,"erro":-1,"bug":-1,
+  "frustrante":-2,"travou":-2,"quebrou":-2,"nojento":-3,"nojenta":-3
+};
+// modificadores (negação)
+const NEG_WORDS = new Set(["não","nao","nunca","jamais","nem"]);
 
-  </script>
+function tokenize(txt){
+  return txt.toLowerCase()
+    .replace(/[.,!?;:()"\[\]]/g," ")
+    .split(/\s+/)
+    .filter(Boolean);
+}
 
-</body>
-</html>
+function classify(text){
+  const tokens = tokenize(text);
+  let score = 0;
+  const matches = [];
+  for (let i=0;i<tokens.length;i++){
+    const t = tokens[i];
+    if (ML_LEXICON[t] !== undefined){
+      let w = ML_LEXICON[t];
+      const prev = tokens[i-1];
+      let negated = false;
+      if (prev && NEG_WORDS.has(prev)){ w = -w; negated = true; }
+      score += w;
+      matches.push({ word: (negated? "não "+t : t), weight: w });
+    }
+  }
+  // confiança via sigmoide
+  const conf = 1/(1+Math.exp(-Math.abs(score)/2));
+  let label = "neutro";
+  if (score >= 1) label = "positivo";
+  else if (score <= -1) label = "negativo";
+  return { label, score, matches, confidence: Math.round(conf*100) };
+}
+
+function initDemo(){
+  const input = document.getElementById("demoInput");
+  const btn = document.getElementById("demoBtn");
+  const clearBtn = document.getElementById("demoClear");
+  const result = document.getElementById("demoResult");
+  const emoji = document.getElementById("demoEmoji");
+  const labelEl = document.getElementById("demoLabel");
+  const bar = document.getElementById("demoBar");
+  const conf = document.getElementById("demoConfidence");
+  const wordsEl = document.getElementById("demoWords");
+  if (!input || !btn) return;
+
+  function run(){
+    const txt = input.value.trim();
+    if (!txt){
+      input.focus();
+      return;
+    }
+    const r = classify(txt);
+    result.hidden = false;
+
+    let emojiChar = "🤔", labelTxt = "Neutro / indefinido", cls = "neutral";
+    if (r.label === "positivo"){ emojiChar="😊"; labelTxt="Positivo"; cls="positive"; }
+    else if (r.label === "negativo"){ emojiChar="😞"; labelTxt="Negativo"; cls="negative"; }
+
+    emoji.textContent = emojiChar;
+    labelEl.textContent = labelTxt;
+    labelEl.className = "demo-verdict-text " + cls;
+
+    // anima a barra de confiança
+    bar.style.width = "0%";
+    bar.className = "demo-bar-fill" + (r.label==="negativo" ? " negative" : "");
+    requestAnimationFrame(()=> { bar.style.width = r.confidence + "%"; });
+    conf.textContent = r.confidence + "% de confiança · pontuação bruta: " + r.score;
+
+    // explicabilidade
+    wordsEl.innerHTML = "";
+    if (r.matches.length === 0){
+      const span = document.createElement("span");
+      span.className = "demo-word";
+      span.textContent = "Nenhuma palavra do vocabulário do modelo foi reconhecida.";
+      wordsEl.appendChild(span);
+    } else {
+      r.matches.forEach(m => {
+        const span = document.createElement("span");
+        span.className = "demo-word " + (m.weight>0 ? "pos" : "neg");
+        span.textContent = m.word + " (" + (m.weight>0?"+":"") + m.weight + ")";
+        wordsEl.appendChild(span);
+      });
+    }
+    result.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }
+
+  btn.addEventListener("click", run);
+  input.addEventListener("keydown", e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") run();
+  });
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    result.hidden = true;
+    input.focus();
+  });
+}
+
+</script>
