@@ -5,7 +5,7 @@ Site estático (HTML + CSS + JS puro) da atividade da disciplina de **Interaçã
 - **Aluno:** Viccenzo de Oliveira Nunes Resende
 - **Professor:** Reane Franco Goulart
 - **Período:** 7º
-- **Entrega:** 31/03/2026
+- **Entrega:** 28/04/2026
 
 ## Conteúdo do site
 1. **Hero institucional** com identidade do IFTM.
